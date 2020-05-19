@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     if(this.login.token != null){
       console.log("users")
+      console.log(this.login.token)
     }else{
       this.router.navigate(['login']);
     }
