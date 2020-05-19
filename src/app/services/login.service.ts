@@ -39,7 +39,7 @@ export class LoginService {
     .toPromise()
     .then((res) => {
       const response: any = res;
-      this.result.next("JWT " + response.tolen);
+      this.result.next("JWT " + response.token);
       return response; 
     });
   }
