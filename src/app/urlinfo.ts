@@ -1,4 +1,5 @@
 //url関連の定数クラス
+import { Observable, of } from 'rxjs';
 
 // 通信方式
 export const method = "http://";
@@ -14,3 +15,8 @@ export const header = {
 // path情報
 // 認証
 export const auth = "api-auth/"
+
+const version = "v1/"
+
+// ユーザ一覧
+export const users_list = version + "users/"

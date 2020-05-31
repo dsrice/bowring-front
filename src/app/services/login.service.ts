@@ -40,7 +40,15 @@ export class LoginService {
     .then((res) => {
       const response: any = res;
       this.result.next("JWT " + response.token);
-      return response; 
+      return response;
     });
+  }
+
+  //認証後のheader情報
+  header(): HttpHeaders{
+    let header = new HttpHeaders(URLinfo.header);
+    header.set("Authorization", this.token.toString());
+    console.log(header)
+    return header;
   }
 }
