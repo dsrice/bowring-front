@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Auth} from '../models/user';
 
 import * as URLinfo from '../urlinfo';
-import { Subject } from 'rxjs';
+import * as key from '../sessionkey';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +14,6 @@ export class LoginService {
   constructor(
     private http: HttpClient,
   ) { }
-
-  private result = new Subject<string>();
-
-  /**
-   * Subscribe するためのプロパティ
-   * `- コンポーネント間で共有するためのプロパティ
-   *
-   * @memberof CommonService
-   */
-  public token = this.result.asObservable();
 
   private url = URLinfo.method + URLinfo.host + URLinfo.auth;
   private httpOptions: any = {
@@ -39,16 +29,9 @@ export class LoginService {
     .toPromise()
     .then((res) => {
       const response: any = res;
-      this.result.next("JWT " + response.token);
+      sessionStorage.setItem(key.token,"JWT " + response.token)
       return response;
     });
   }
 
-  //認証後のheader情報
-  header(): HttpHeaders{
-    let header = new HttpHeaders(URLinfo.header);
-    header.set("Authorization", this.token.toString());
-    console.log(header)
-    return header;
-  }
 }

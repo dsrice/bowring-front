@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Output ,EventEmitter} from '@angular/core';
 import {LoginService} from '../../services/login.service'
 import {UserService} from '../../services/user/user.service'
+import {SessionService} from '../../services/core/session.service'
+import { HttpHeaders } from '@angular/common/http';
+import { Session } from '../../models/session'; // 追加
 
 import { Router } from '@angular/router'
 
@@ -11,22 +14,20 @@ import { Router } from '@angular/router'
 })
 export class UsersComponent implements OnInit {
 
+  @Output() token = new EventEmitter<HttpHeaders>();
+
   constructor(
-    private login: LoginService,
+    public login: LoginService,
+    public sessionService: SessionService,
     private user: UserService,
     private router: Router
   ) { }
 
+  public info = false; 
+
   ngOnInit(): void {
-    if(this.login.token != null){
-      console.log(this.login.token)
-
-      this.user.userlist();
-      console.log(this.user.userlist())
-
-    }else{
-      this.router.navigate(['login']);
-    }
+    var list = this.user.userlist();
+    console.log(list)
   }
 
 }

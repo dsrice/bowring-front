@@ -1,5 +1,5 @@
 //url関連の定数クラス
-import { Observable, of } from 'rxjs';
+import * as key from './sessionkey';
 
 // 通信方式
 export const method = "http://";
@@ -10,7 +10,7 @@ export const host = "127.0.0.1:8000/";
 // ヘッダー情報
 export const header = {
     'Content-Type': 'application/json'
-    };
+  };
 
 // path情報
 // 認証

@@ -5,7 +5,7 @@ import {LoginService} from '../login.service'
 import {User} from '../../models/user';
 
 import * as URLinfo from '../../urlinfo';
-import { Observable } from 'rxjs';
+import * as key from '../../sessionkey';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,21 @@ export class UserService {
 
   private httpOptions: any = {
     // ヘッダ情報
-    headers:this.login.header(),
-    body: null
+    headers: new HttpHeaders(URLinfo.header),
   };
 
   //ユーザ一覧
   userlist(){
-    return this.http.get<User[]>(this.url)
+    var token = sessionStorage.getItem(key.token)
+    console.log(URLinfo.header)
+    var base_header = URLinfo.header
+
+    base_header["Authorization"] = token
+    console.log(base_header["Content-Type"])
+    console.log(base_header["Authorization"])
+    console.log(token)
+    var header = new HttpHeaders(base_header);
+    console.log(this.httpOptions.headers)
+    return this.http.get<User[]>(this.url,this.httpOptions).subscribe()
   }
 }

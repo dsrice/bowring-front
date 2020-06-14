@@ -9,12 +9,14 @@ import { LoginComponent } from './components/login/login.component';
 
 import { LoginService } from './services/login.service';
 import { UsersComponent } from './components/users/users.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    UsersComponent
+    UsersComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
