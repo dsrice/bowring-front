@@ -3,5 +3,7 @@ export class Auth{
 }
 
 export class User{
-  mail: string;
+  email: string;
+  first_name: string;
+  last_name: string;
 }

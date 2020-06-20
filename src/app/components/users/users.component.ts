@@ -29,8 +29,8 @@ export class UsersComponent implements OnInit {
     this.user.userlist()
     .then((res) => {
       this.list = res;
+      console.log(this.list)
     });
-    console.log(this.list)
   }
 
 }
