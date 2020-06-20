@@ -25,7 +25,7 @@ export class UserService {
   };
 
   //ユーザ一覧
-  userlist(){
+  userlist(): Promise<User[]>{
     var token = sessionStorage.getItem(key.token)
     console.log(URLinfo.header)
     var base_header = URLinfo.header
@@ -36,6 +36,12 @@ export class UserService {
     console.log(token)
     var header = new HttpHeaders(base_header);
     console.log(this.httpOptions.headers)
-    return this.http.get<User[]>(this.url,this.httpOptions).subscribe()
+    return this.http.get(this.url,this.httpOptions)
+    .toPromise()
+    .then((res) => {
+      const result: any = res;
+      return result;
+    })
+
   }
 }

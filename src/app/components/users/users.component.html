@@ -1,1 +1,12 @@
-<p>users works!</p>
+<p>ユーザ一覧</p>
+
+<table class="table">
+  <tr>
+    <th id="th-id">mail</th>
+    <th id="th-message">氏名</th>
+  </tr>
+  <tr *ngFor="let user of list; index as i">
+    <td>{{user.email}}</td>
+    <td>{{user.fistname}}</td>
+  </tr>
+</table>

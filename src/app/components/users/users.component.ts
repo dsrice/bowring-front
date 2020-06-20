@@ -3,9 +3,8 @@ import {LoginService} from '../../services/login.service'
 import {UserService} from '../../services/user/user.service'
 import {SessionService} from '../../services/core/session.service'
 import { HttpHeaders } from '@angular/common/http';
-import { Session } from '../../models/session'; // 追加
 
-import { Router } from '@angular/router'
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-users',
@@ -20,14 +19,18 @@ export class UsersComponent implements OnInit {
     public login: LoginService,
     public sessionService: SessionService,
     private user: UserService,
-    private router: Router
   ) { }
 
   public info = false; 
 
+  list:User[];
+
   ngOnInit(): void {
-    var list = this.user.userlist();
-    console.log(list)
+    this.user.userlist()
+    .then((res) => {
+      this.list = res;
+    });
+    console.log(this.list)
   }
 
 }
