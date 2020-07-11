@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SessionService} from '../../services/core/session.service'
 import { HttpHeaders } from '@angular/common/http';
-import { Session } from '../../models/session'; // 追加
+import { Router  } from '@angular/router';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,16 +9,27 @@ import { Session } from '../../models/session'; // 追加
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public sessionService: SessionService) { }
-  public login = false; // 変更
+  constructor(
+    private router: Router
+  ) { }
+
   ngOnInit(): void {
-    this.sessionService.sessionState.subscribe((session: Session)=> { // 追加
-      if(session) {
-          this.login = session.login;
-          console.log(this.login)
-        }
-    })
-    console.log(this.login)
   }
 
+  users:string;
+  scorelist:string;
+
+  ngDocheck(){
+    (this.router.url === '/users')?
+      this.users = 'active'
+    :
+      this.users = ''
+    ;
+
+    (this.router.url === '/scorelist')?
+      this.scorelist = 'active'
+    :
+      this.scorelist = ''
+    ;
+  }
 }
